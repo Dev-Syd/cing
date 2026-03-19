@@ -3,82 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NameForge - Name &amp; Label Generator</title>
+    <title>NameForge</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app">
         <header>
-            <h1>NameForge</h1>
-            <p class="tagline">Generate names inspired by the worlds you love</p>
+            <div class="header-row">
+                <div>
+                    <h1>NameForge</h1>
+                    <p class="tagline">Tell me what kind of name you need</p>
+                </div>
+                <button id="settings-btn" class="icon-btn" title="API Settings">&#9881;</button>
+            </div>
         </header>
 
-        <main>
-            <section class="generator-panel">
+        <!-- API Key Modal -->
+        <div class="modal-overlay" id="settings-modal">
+            <div class="modal">
+                <h2>API Settings</h2>
+                <p class="modal-desc">Your key is stored locally in your browser and never sent anywhere except directly to the Anthropic API.</p>
                 <div class="input-group">
-                    <label for="category">What kind of name?</label>
-                    <select id="category">
-                        <option value="character">Character Name</option>
-                        <option value="place">Place / Location</option>
-                        <option value="weapon">Weapon / Artifact</option>
-                        <option value="species">Species / Race</option>
-                        <option value="ship">Ship / Vehicle</option>
-                        <option value="team">Team / Guild / Faction</option>
+                    <label for="api-key">Anthropic API Key</label>
+                    <input type="password" id="api-key" placeholder="sk-ant-...">
+                </div>
+                <div class="input-group">
+                    <label for="model-select">Model</label>
+                    <select id="model-select">
+                        <option value="claude-sonnet-4-20250514">Claude Sonnet 4 (fast, cheap)</option>
+                        <option value="claude-haiku-4-5-20251001">Claude Haiku 4.5 (fastest, cheapest)</option>
+                        <option value="claude-opus-4-20250514">Claude Opus 4 (best quality)</option>
                     </select>
                 </div>
-
-                <div class="input-group">
-                    <label for="genre">Genre / Setting</label>
-                    <select id="genre">
-                        <option value="fantasy">Fantasy</option>
-                        <option value="scifi">Sci-Fi</option>
-                        <option value="cyberpunk">Cyberpunk</option>
-                        <option value="steampunk">Steampunk</option>
-                        <option value="horror">Horror / Gothic</option>
-                        <option value="mythology">Mythology</option>
-                        <option value="superhero">Superhero / Comic</option>
-                        <option value="western">Western</option>
-                    </select>
+                <div class="modal-actions">
+                    <button id="save-settings" class="btn-primary">Save</button>
+                    <button id="close-settings" class="btn-secondary">Cancel</button>
                 </div>
+            </div>
+        </div>
 
-                <div class="input-group">
-                    <label for="inspirations">Inspirations <span class="hint">(comma-separated series, authors, worlds)</span></label>
-                    <input type="text" id="inspirations" placeholder="e.g. Lord of the Rings, The Witcher, Elder Scrolls">
+        <!-- Chat Area -->
+        <div class="chat-container" id="chat-container">
+            <div class="message assistant">
+                <div class="message-content">
+                    <p>Hey! I'm NameForge. Tell me what kind of name you're looking for and I'll come up with some options.</p>
+                    <p>For example:</p>
+                    <ul>
+                        <li>"I need a D&amp;D character name inspired by Lord of the Rings"</li>
+                        <li>"Give me sci-fi ship names that feel like they belong in The Expanse"</li>
+                        <li>"I want a villain name for a dark fantasy setting, something ancient and menacing"</li>
+                    </ul>
                 </div>
+            </div>
+        </div>
 
-                <div class="input-group">
-                    <label for="traits">Character Traits or Vibes <span class="hint">(optional)</span></label>
-                    <input type="text" id="traits" placeholder="e.g. mysterious, noble, battle-hardened, ancient">
+        <!-- Input Area -->
+        <div class="input-area">
+            <textarea id="user-input" placeholder="Describe the kind of name you want..." rows="2"></textarea>
+            <button id="send-btn" class="send-btn" title="Send">&#9654;</button>
+        </div>
+
+        <!-- Favorites Bar -->
+        <div class="favorites-bar" id="favorites-bar">
+            <div class="favorites-header">
+                <span class="fav-label">Saved <span id="fav-count"></span></span>
+                <div>
+                    <button id="copy-favorites" class="small-btn" style="display:none;">Copy All</button>
+                    <button id="clear-favorites" class="small-btn danger" style="display:none;">Clear</button>
                 </div>
-
-                <div class="input-group">
-                    <label for="count">How many names?</label>
-                    <input type="range" id="count" min="3" max="15" value="6">
-                    <span id="count-display" class="count-display">6</span>
-                </div>
-
-                <button id="generate-btn" class="generate-btn">Forge Names</button>
-            </section>
-
-            <section class="results-panel" id="results-panel">
-                <h2>Your Names</h2>
-                <div class="results-grid" id="results-grid"></div>
-                <p class="empty-state" id="empty-state">Configure your settings above and hit <strong>Forge Names</strong> to get started.</p>
-            </section>
-
-            <section class="favorites-panel" id="favorites-panel">
-                <h2>Saved Favorites <span class="fav-count" id="fav-count"></span></h2>
-                <div class="favorites-list" id="favorites-list"></div>
-                <button id="clear-favorites" class="clear-btn" style="display:none;">Clear All</button>
-                <button id="copy-favorites" class="copy-btn" style="display:none;">Copy All to Clipboard</button>
-            </section>
-        </main>
-
-        <footer>
-            <p>NameForge &mdash; Built for storytellers, gamers &amp; world-builders</p>
-        </footer>
+            </div>
+            <div class="favorites-list" id="favorites-list"></div>
+        </div>
     </div>
 
-    <script src="generator.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
