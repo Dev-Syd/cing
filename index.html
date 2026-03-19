@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NameForge - Name &amp; Label Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>NameForge</h1>
+            <p class="tagline">Generate names inspired by the worlds you love</p>
+        </header>
+
+        <main>
+            <section class="generator-panel">
+                <div class="input-group">
+                    <label for="category">What kind of name?</label>
+                    <select id="category">
+                        <option value="character">Character Name</option>
+                        <option value="place">Place / Location</option>
+                        <option value="weapon">Weapon / Artifact</option>
+                        <option value="species">Species / Race</option>
+                        <option value="ship">Ship / Vehicle</option>
+                        <option value="team">Team / Guild / Faction</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="genre">Genre / Setting</label>
+                    <select id="genre">
+                        <option value="fantasy">Fantasy</option>
+                        <option value="scifi">Sci-Fi</option>
+                        <option value="cyberpunk">Cyberpunk</option>
+                        <option value="steampunk">Steampunk</option>
+                        <option value="horror">Horror / Gothic</option>
+                        <option value="mythology">Mythology</option>
+                        <option value="superhero">Superhero / Comic</option>
+                        <option value="western">Western</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="inspirations">Inspirations <span class="hint">(comma-separated series, authors, worlds)</span></label>
+                    <input type="text" id="inspirations" placeholder="e.g. Lord of the Rings, The Witcher, Elder Scrolls">
+                </div>
+
+                <div class="input-group">
+                    <label for="traits">Character Traits or Vibes <span class="hint">(optional)</span></label>
+                    <input type="text" id="traits" placeholder="e.g. mysterious, noble, battle-hardened, ancient">
+                </div>
+
+                <div class="input-group">
+                    <label for="count">How many names?</label>
+                    <input type="range" id="count" min="3" max="15" value="6">
+                    <span id="count-display" class="count-display">6</span>
+                </div>
+
+                <button id="generate-btn" class="generate-btn">Forge Names</button>
+            </section>
+
+            <section class="results-panel" id="results-panel">
+                <h2>Your Names</h2>
+                <div class="results-grid" id="results-grid"></div>
+                <p class="empty-state" id="empty-state">Configure your settings above and hit <strong>Forge Names</strong> to get started.</p>
+            </section>
+
+            <section class="favorites-panel" id="favorites-panel">
+                <h2>Saved Favorites <span class="fav-count" id="fav-count"></span></h2>
+                <div class="favorites-list" id="favorites-list"></div>
+                <button id="clear-favorites" class="clear-btn" style="display:none;">Clear All</button>
+                <button id="copy-favorites" class="copy-btn" style="display:none;">Copy All to Clipboard</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>NameForge &mdash; Built for storytellers, gamers &amp; world-builders</p>
+        </footer>
+    </div>
+
+    <script src="generator.js"></script>
+</body>
+</html>
